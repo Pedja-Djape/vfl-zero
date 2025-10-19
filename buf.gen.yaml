@@ -1,0 +1,12 @@
+version: v1
+plugins:
+  - plugin: buf.build/protocolbuffers/go
+    out: go/pkg/protos
+    opt: paths=source_relative
+  - plugin: buf.build/grpc/go
+    out: go/pkg/protos
+    opt: paths=source_relative
+  - plugin: buf.build/protocolbuffers/python
+    out: python
+  - plugin: buf.build/grpc/python
+    out: python

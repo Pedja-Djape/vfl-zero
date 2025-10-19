@@ -1,0 +1,11 @@
+syntax = "proto3";
+package vfl.v1;
+
+option go_package = "github.com/Pedja-Djape/vfl-zero/go/pkg/protos/v1;v1";
+
+message RegisterPartyRequest { string party_id = 1; }
+message RegisterPartyResponse { string session_id = 1; string echo = 2; }
+
+service Coordinator {
+    rpc RegisterParty(RegisterPartyRequest) returns (RegisterPartyResponse);
+}

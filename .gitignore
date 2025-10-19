@@ -1,0 +1,14 @@
+venv/
+
+__pycache__/
+*.pyc
+.DS_Store
+
+certs/
+*.key
+*.crt
+*.env
+
+go/pkg/protos/
+python/vfl/v1/*_pb2.py
+python/vfl/v1/*_pb2_grpc.py
