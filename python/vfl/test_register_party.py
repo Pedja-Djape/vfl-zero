@@ -4,7 +4,6 @@ from vfl.v1 import coordinator_pb2 as pb
 from vfl.v1 import coordinator_pb2_grpc as stubs
 
 def main():
-    # insecure channel for dev; switch to TLS later
     ca_path = Path(__file__).resolve().parents[2] / "certs" / "dev-ca.crt"
     root_certs = ca_path.read_bytes()
     creds = grpc.ssl_channel_credentials(root_certificates=root_certs)
