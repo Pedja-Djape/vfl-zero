@@ -4,9 +4,16 @@ from vfl.v1 import coordinator_pb2 as pb
 from vfl.v1 import coordinator_pb2_grpc as stubs
 
 def main():
-    ca_path = Path(__file__).resolve().parents[2] / "certs" / "dev-ca.crt"
-    root_certs = ca_path.read_bytes()
-    creds = grpc.ssl_channel_credentials(root_certificates=root_certs)
+    base_path = Path(__file__).resolve().parents[2] / "certs"
+    root_certs = (base_path / "dev-ca.crt").read_bytes()
+    client_cert = (base_path / "client.crt").read_bytes()
+    client_key = (base_path / "client.key").read_bytes()
+
+    creds = grpc.ssl_channel_credentials(
+        root_certificates=root_certs,
+        private_key=client_key,
+        certificate_chain=client_cert,
+    )
 
     channel = grpc.secure_channel("localhost:8443", creds)
     client = stubs.CoordinatorStub(channel)
