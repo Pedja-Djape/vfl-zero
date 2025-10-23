@@ -22,6 +22,7 @@ func main() {
   tlsCfg := &tls.Config{
     Certificates: []tls.Certificate{cert},
     MinVersion: tls.VersionTLS12,
+    NextProtos: []string{"h2"},
   }
 
   s := grpc.NewServer(grpc.Creds(credentials.NewTLS(tlsCfg)))

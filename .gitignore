@@ -12,3 +12,5 @@ certs/
 go/pkg/protos/
 python/vfl/v1/*_pb2.py
 python/vfl/v1/*_pb2_grpc.py
+
+personal-docs/
