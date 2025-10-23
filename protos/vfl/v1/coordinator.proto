@@ -4,7 +4,11 @@ package vfl.v1;
 option go_package = "github.com/Pedja-Djape/vfl-zero/go/pkg/protos/vfl/v1;v1";
 
 message RegisterPartyRequest { string party_id = 1; }
-message RegisterPartyResponse { string session_id = 1; string echo = 2; }
+message RegisterPartyResponse { 
+    string session_id = 1;
+    string echo = 2;  
+    string role = 3;
+}
 
 message HeartbeatRequest { string session_id = 1; }
 message HeartbeatResponse { string status = 1; int64 server_unix_nano = 2; }

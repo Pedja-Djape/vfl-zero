@@ -36,6 +36,12 @@ func (s *coordinatorServer) RegisterParty(ctx context.Context, req *v1.RegisterP
   if cn != req.GetPartyId() {
     return nil, status.Error(codes.Unauthenticated, "client certificate does not match party ID")
   }
+
+  role := "PASSIVE";
+  if (req.GetPartyId() == "partyA") {
+    role = "ACTIVE"
+  }
+
   s.mu.Lock()
   s.parties[cn] = "sess_dev_0001"
   s.mu.Unlock()
@@ -43,6 +49,7 @@ func (s *coordinatorServer) RegisterParty(ctx context.Context, req *v1.RegisterP
   return &v1.RegisterPartyResponse{
     SessionId: "sess_dev_0001",
     Echo:      fmt.Sprintf("hello, %s", req.GetPartyId()),
+    Role: role,
   }, nil
 }
 
