@@ -17,9 +17,15 @@ type coordinatorServer struct{
   v1.UnimplementedCoordinatorServer
   mu sync.Mutex
   parties map[string]string // party_id -> session_id
+  roles map[string]v1.Role // party_id -> role
 }
 
-func NewCoordinatorServer() *coordinatorServer { return &coordinatorServer{ parties: make(map[string]string)} }
+func NewCoordinatorServer() *coordinatorServer {
+  return &coordinatorServer{ 
+    parties: make(map[string]string),
+    roles: map[string]v1.Role{"partyA": v1.Role_ACTIVE},
+  }
+}
 
 func (s *coordinatorServer) RegisterParty(ctx context.Context, req *v1.RegisterPartyRequest) (*v1.RegisterPartyResponse, error) {
   p, ok := peer.FromContext(ctx);
@@ -37,10 +43,8 @@ func (s *coordinatorServer) RegisterParty(ctx context.Context, req *v1.RegisterP
     return nil, status.Error(codes.Unauthenticated, "client certificate does not match party ID")
   }
 
-  role := "PASSIVE";
-  if (req.GetPartyId() == "partyA") {
-    role = "ACTIVE"
-  }
+  role, ok := s.roles[req.GetPartyId()]
+  if !ok { role = v1.Role_PASSIVE}
 
   s.mu.Lock()
   s.parties[cn] = "sess_dev_0001"
@@ -49,7 +53,7 @@ func (s *coordinatorServer) RegisterParty(ctx context.Context, req *v1.RegisterP
   return &v1.RegisterPartyResponse{
     SessionId: "sess_dev_0001",
     Echo:      fmt.Sprintf("hello, %s", req.GetPartyId()),
-    Role: role,
+    Role:      role,
   }, nil
 }
 

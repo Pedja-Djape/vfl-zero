@@ -3,11 +3,16 @@ package vfl.v1;
 
 option go_package = "github.com/Pedja-Djape/vfl-zero/go/pkg/protos/vfl/v1;v1";
 
+enum Role {
+    ACTIVE = 0;
+    PASSIVE = 1;
+}
+
 message RegisterPartyRequest { string party_id = 1; }
 message RegisterPartyResponse { 
     string session_id = 1;
     string echo = 2;  
-    string role = 3;
+    Role role = 3;
 }
 
 message HeartbeatRequest { string session_id = 1; }

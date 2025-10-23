@@ -23,7 +23,7 @@ def main():
     resp = client.RegisterParty(pb.RegisterPartyRequest(party_id="partyA"))
     print("session_id:", resp.session_id)
     print("echo:", resp.echo)
-    print("role", resp.role)
+    print("role", resp.role, pb.Role.Name(resp.role))
     heartbeat_resp = client.Heartbeat(pb.HeartbeatRequest(session_id=resp.session_id))
     print(heartbeat_resp)
 
