@@ -23,6 +23,9 @@ def main():
     resp = client.RegisterParty(pb.RegisterPartyRequest(party_id="partyA"))
     print("session_id:", resp.session_id)
     print("echo:", resp.echo)
+    heartbeat_resp = client.Heartbeat(pb.HeartbeatRequest(session_id=resp.session_id))
+    print(heartbeat_resp)
+
 
 if __name__ == "__main__":
     main()

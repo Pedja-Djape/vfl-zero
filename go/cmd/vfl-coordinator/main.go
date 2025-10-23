@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/Pedja-Djape/vfl-zero/go/internal/api"
-	v1 "github.com/Pedja-Djape/vfl-zero/go/pkg/protos/v1"
+	v1 "github.com/Pedja-Djape/vfl-zero/go/pkg/protos/vfl/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
