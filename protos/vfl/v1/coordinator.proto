@@ -23,7 +23,7 @@ message Header {
     string party_id = 2;
     int64 round_id = 3;
     int64 seq_no = 4;
-    ts_unix_nano = 5;
+    int64 ts_unix_nano = 5;
 }
 
 message ClientHello {
