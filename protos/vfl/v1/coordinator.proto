@@ -18,6 +18,19 @@ message RegisterPartyResponse {
 message HeartbeatRequest { string session_id = 1; }
 message HeartbeatResponse { string status = 1; int64 server_unix_nano = 2; }
 
+message Header {
+    string session_id = 1;
+    string party_id = 2;
+    int64 round_id = 3;
+    int64 seq_no = 4;
+    ts_unix_nano = 5;
+}
+
+message ClientHello {
+    Header header = 1;
+    Role role = 2;
+}
+
 service Coordinator {
     rpc RegisterParty(RegisterPartyRequest) returns (RegisterPartyResponse);
     rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
